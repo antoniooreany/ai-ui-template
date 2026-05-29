@@ -9,8 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: staging
-    # Only deploy if tests pass
-    needs: [] # If combined in one file, would need 'test'
     
     steps:
     - uses: actions/checkout@v4
@@ -18,6 +16,5 @@ jobs:
     - name: Deploy to Staging
       run: |
         echo "Deploying to Staging environment..."
-        # Example deployment steps (e.g., using SSH or a cloud provider CLI)
-        # ssh user@staging-server "cd /app && git pull && npm install && pm2 restart server"
+        # Example deployment steps
         echo "Staging deployment complete."
