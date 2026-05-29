@@ -48,11 +48,18 @@ describe('POST /api/generate', () => {
 
   it('should return 500 on error', async () => {
     mockConfig.shouldFail = true;
+    
+    // Silence console.error for this test to keep the output clean
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    
     const res = await request(app)
       .post('/api/generate')
       .send({ prompt: 'Fail me' });
     
     expect(res.statusCode).toEqual(500);
     expect(res.body).toHaveProperty('error', 'Failed to generate content');
+    
+    // Restore console.error
+    consoleSpy.mockRestore();
   });
 });
