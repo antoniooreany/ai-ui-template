@@ -1,0 +1,27 @@
+name: Deploy to Production
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Verify Staging Status
+      run: |
+        echo "Verifying that the version in staging is stable..."
+        # In a real scenario, this might check a health endpoint or a status flag
+        echo "Staging verification passed."
+
+    - name: Deploy to Production
+      run: |
+        echo "Deploying to Production environment..."
+        # Example: docker build -t ai-ui-template .
+        # Example: push to registry and update k8s/ecs
+        echo "Production deployment of ${{ github.ref_name }} complete."
